@@ -17,13 +17,13 @@ if not os.path.exists(save_path):
 
 doc=fitz.open(doc_name)
 toc=doc.get_toc()
-print(toc)
+#print(toc)   might be used if you want to check the toc of the pdf file
 list_1=[]
 for i in range(len(toc)):
     if toc[i][0] == depth:
         name_check = [toc[i][0], re.sub(r'[:/\\*?<>|]', '', toc[i][1].replace("\r", "")), toc[i][2]]
         list_1.append(name_check)
-print(list_1)
+#print(list_1)     might be used if you want to check the final list for saving
 for i in range(len(list_1)-1):
     doc1=fitz.open()
     doc1.insert_pdf(doc,from_page=list_1[i][2]-1,to_page=list_1[i+1][2])
