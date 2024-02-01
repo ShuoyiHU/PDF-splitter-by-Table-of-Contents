@@ -15,4 +15,4 @@ If you need personalization in this step, please modify line 24 in the code. Or 
 
 <b>Tips</b>
 
-Any problems or comments or advice? Contact me by sending an email to hushuoyi@westlake.edu.cn. I'm more than happy to answer them.
+Any problems or comments or advice? Contact me by sending an email to hushuoyi@westlake.edu.cn. I'm more than happy to answer these questions.
