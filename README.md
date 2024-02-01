@@ -9,8 +9,10 @@ This is a small tool to help people use python to split PDF file by the Table of
 4. Check the output folder for the result.
 
 <b>Note on File Naming</b>
+
 On my own testing computer, some special characters like \/:*?"<>| are not allowed to appear in a pdf file name, so in the processing process, these characters were intentionally removed.
 If you need personalization in this step, please modify line 24 in the code. Or send me an e-mail (hushuoyi@westlake.edu.cn), I would be more than happy to help if you could give me the instruction on what kind of special characters are not allowed in other systems' setup.
 
 <b>Tips</b>
+
 Any problems or comments or advice? Contact me by sending an email to hushuoyi@westlake.edu.cn. I'm more than happy to answer them.
