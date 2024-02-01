@@ -1,5 +1,6 @@
 import fitz
 import os
+import re
 
 doc_name=str(input("Enter the name of the pdf file and the absolute path of it, like this: D:/pdf spliter/Mathematical methods for physics and engineering.pdf"+'\n'))
 if not os.path.exists(doc_name) or not doc_name.endswith(".pdf"):
@@ -16,18 +17,26 @@ if not os.path.exists(save_path):
 
 doc=fitz.open(doc_name)
 toc=doc.get_toc()
+print(toc)
 list_1=[]
 for i in range(len(toc)):
     if toc[i][0] == depth:
-        list_1.append(toc[i])
-
+        name_check = [toc[i][0], re.sub(r'[:/\\*?<>|]', '', toc[i][1].replace("\r", "")), toc[i][2]]
+        list_1.append(name_check)
+print(list_1)
 for i in range(len(list_1)-1):
     doc1=fitz.open()
-    doc1.insert_pdf(doc,from_page=list_1[i][2]-1,to_page=list_1[i+1][2]-1)
-    doc1.save(save_path+str(list_1[i][1])+".pdf")
+    doc1.insert_pdf(doc,from_page=list_1[i][2]-1,to_page=list_1[i+1][2])
+    try:
+        doc1.save(save_path+str(list_1[i][1])+".pdf")
+    except:
+        print("Possibly the file name for "+str(list_1[i][1])+" is not valid for saving, please check it.")
     doc1.close()
 doc2=fitz.open()
 doc2.insert_pdf(doc,from_page=list_1[-1][2]-1,to_page=len(doc)-1)
-doc2.save(save_path+str(list_1[-1][1])+".pdf")
+try:
+    doc2.save(save_path+str(list_1[-1][1])+".pdf")
+except:
+    print("Possibly the file name for "+str(list_1[-1][1])+"is not valid for saving, please check it.")
 doc2.close()
-print("This run is successful. Please check"+save_path+".")
+print("This run is successful. Please check "+save_path+".")
