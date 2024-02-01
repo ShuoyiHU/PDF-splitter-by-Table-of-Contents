@@ -1,0 +1,33 @@
+import fitz
+import os
+
+doc_name=str(input("Enter the name of the pdf file and the absolute path of it, like this: D:/pdf spliter/Mathematical methods for physics and engineering.pdf"+'\n'))
+if not os.path.exists(doc_name) or not doc_name.endswith(".pdf"):
+    print("The file you give does not exist or is not a pdf file, please check it.")
+    exit()
+depth=int(input("Enter the depth of the toc that you want to cut, like this: 1/2/3"+'\n'))
+if depth <= 0 or not isinstance(depth, int):
+    print("Depth should be a positive integer number, please re-enter it.")
+    exit()
+save_path=str(input("Enter the absolute path of the folder that you want to save the pdf files, like this: D:/pdf spliter/Mathematical methods for physics and engineering/"+'\n'))
+if not os.path.exists(save_path):
+    print("The folder for saving you give does not exist, please check it.")
+    exit()
+
+doc=fitz.open(doc_name)
+toc=doc.get_toc()
+list_1=[]
+for i in range(len(toc)):
+    if toc[i][0] == depth:
+        list_1.append(toc[i])
+
+for i in range(len(list_1)-1):
+    doc1=fitz.open()
+    doc1.insert_pdf(doc,from_page=list_1[i][2]-1,to_page=list_1[i+1][2]-1)
+    doc1.save(save_path+str(list_1[i][1])+".pdf")
+    doc1.close()
+doc2=fitz.open()
+doc2.insert_pdf(doc,from_page=list_1[-1][2]-1,to_page=len(doc)-1)
+doc2.save(save_path+str(list_1[-1][1])+".pdf")
+doc2.close()
+print("This run is successful. Please check"+save_path+".")
