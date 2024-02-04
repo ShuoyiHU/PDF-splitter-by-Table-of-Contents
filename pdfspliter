@@ -26,7 +26,7 @@ for i in range(len(toc)):
 #print(list_1)     might be used if you want to check the final list for saving
 for i in range(len(list_1)-1):
     doc1=fitz.open()
-    doc1.insert_pdf(doc,from_page=list_1[i][2]-1,to_page=list_1[i+1][2])
+    doc1.insert_pdf(doc,from_page=list_1[i][2]-1,to_page=list_1[i+1][2]-2)
     try:
         doc1.save(save_path+str(list_1[i][1])+".pdf")
     except:
